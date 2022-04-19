@@ -1,11 +1,3 @@
-function isValid(name) {
-  if(name !== null && name !== ''  && name.length >= 4 && name.length === name.replace(/\s/g, '').length) {
-      return true;
-  } 
-  return false;
-  
-}
-
 describe('1-module-2-task', () => {
   it('если имя корректное, то true', () => {
     expect(isValid('Ilia')).toEqual(true);
