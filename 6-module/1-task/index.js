@@ -13,19 +13,19 @@
  *
  */
 
-let rows = [
-  { name: 'Ilia', age: 25, salary: 1000, city: 'Petrozavodsk' },
-  { name: 'Vasya', age: 14, salary: 1500, city: 'Moscow' },
-  { name: 'Ivan', age: 22, salary: 100, city: 'Bryansk' },
-  { name: 'Petya', age: 45, salary: 990, city: 'Chita' }
-];
-
 export default class UserTable {
   #rows = [];
   elem = null;
   constructor(rows) {
     this.#rows = rows;
-    this.elem = document.createElement('div');
+    this.render();
+  }
+
+
+  #onBtnClick = (event) => {
+    if (event.target.dataset.btn) {
+      event.target.closest('tr').remove();
+    }
   }
 
   render() {
@@ -66,24 +66,17 @@ export default class UserTable {
       td.append(button);
       tr.append(td);
       tbody.append(tr);
-    })
-    this.elem.append(table);
-
-
-    this.elem.addEventListener('click', (event) => {
-      if (event.target.dataset.btn) {
-        event.target.closest('tr').remove();
-      }
     });
+    this.elem = table;
 
+
+    this.elem.addEventListener('click', this.#onBtnClick);
 
   }
 
 }
 
 
-const table = new UserTable(rows);
-console.log(table);
-document.querySelector('body').append(table.elem);
 
-table.render();
+
+
