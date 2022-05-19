@@ -8,10 +8,11 @@
 //   id: "laab-kai-chicken-salad" // уникальный идентификатор товара, нужен для добавления товара в корзину
 // };
 
+console.clear();
 
 export default class ProductCard {
   product = null;
-  elem = null;
+  elem = document.createElement('div');
   constructor(product) {
     this.product = product;
     this.render();
@@ -39,44 +40,21 @@ export default class ProductCard {
 
 
   render() {
-    const card = document.createElement('div');
-    card.classList.add('card');
+    const template = `  
+    <div class="card__top">
+      <img src="/assets/images/products/${this.product.image}" class="card__image" alt="product">
+      <span class="card__price">&euro;${this.product.price.toFixed((2))}</span>
+    </div>
+    <div class="card__body">
+      <div class="card__title">${this.product.name}</div>
+      <button type="button" class="card__button">
+        <img src="/assets/images/icons/plus-icon.svg" alt="icon">
+      </button>
+    </div>
+    `;
 
-    const cardTop = document.createElement('div');
-    cardTop.classList.add('card__top');
-    card.append(cardTop);
-
-    const img = document.createElement('img');
-    img.classList.add('card__image');
-    img.src = `/assets/images/products/${this.product.image}`;
-    cardTop.append(img);
-
-    const span = document.createElement('span');
-    span.classList.add('card__price');
-    span.innerHTML = `&euro;${this.product.price.toFixed((2))}`;
-    cardTop.append(span);
-
-    const cardBody = document.createElement('div');
-    cardBody.classList.add('card__body');
-    card.append(cardBody);
-
-    const title = document.createElement('div');
-    title.classList.add('card__title');
-    title.innerHTML = this.product.name;
-    cardBody.append(title);
-
-    const btn = document.createElement('button');
-    btn.classList.add('card__button');
-
-
-    const icon = document.createElement('img');
-    icon.src = `/assets/images/icons/plus-icon.svg`;
-    btn.append(icon);
-
-
-    cardBody.append(btn);
-
-    this.elem = card;
+    this.elem.classList.add('card');
+    this.elem.innerHTML = template;
 
     this.container.addEventListener('click', this.#onBtnClick);
   }

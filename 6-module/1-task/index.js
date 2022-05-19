@@ -13,13 +13,16 @@
  *
  */
 
+
 export default class UserTable {
   #rows = [];
-  elem = null;
+  elem = document.createElement('div');
   constructor(rows) {
     this.#rows = rows;
     this.render();
   }
+
+
 
 
   #onBtnClick = (event) => {
@@ -29,45 +32,33 @@ export default class UserTable {
   }
 
   render() {
-    const table = document.createElement('table');
-    const thead = document.createElement('thead');
-    table.append(thead);
-    let tr = document.createElement('tr');
-    let th = document.createElement('th');
-    th.innerHTML = 'Имя';
-    tr.append(th);
-    th = document.createElement('th');
-    th.innerHTML = 'Возраст';
-    tr.append(th);
-    th = document.createElement('th');
-    th.innerHTML = 'Зарпалата';
-    tr.append(th);
-    th = document.createElement('th');
-    th.innerHTML = 'Город';
-    tr.append(th);
-    th = document.createElement('th');
-    th.innerHTML = '';
-    tr.append(th);
-    tr.append(th);
-    thead.append(tr);
-    const tbody = document.createElement('tbody');
-    table.append(tbody);
-    this.#rows.map(item => {
-      tr = document.createElement('tr');
-      for (let key in item) {
-        let td = document.createElement('td');
-        td.innerHTML = item[key];
-        tr.append(td);
-      }
-      let td = document.createElement('td');
-      let button = document.createElement('button');
-      button.innerHTML = 'X';
-      button.setAttribute("data-btn", "delete");
-      td.append(button);
-      tr.append(td);
-      tbody.append(tr);
-    });
-    this.elem = table;
+    const template = `
+    <table>
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Возраст</th>
+            <th>Зарплата</th>
+            <th>Город</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    ${this.#rows.map(item => {
+      return `
+      <tr>
+      <td>${item.name}</td>
+      <td>${item.age}</td>
+      <td>${item.salary}</td>
+      <td>${item.city}</td>
+      <td><button data-btn ="delete">X</button></td>
+      </tr>`;
+    })}
+    </tbody>
+  </table>
+    `;
+    
+    this.elem.innerHTML = template;
 
 
     this.elem.addEventListener('click', this.#onBtnClick);
@@ -75,6 +66,7 @@ export default class UserTable {
   }
 
 }
+
 
 
 
