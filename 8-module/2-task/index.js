@@ -26,7 +26,7 @@ export default class ProductGrid {
    
    if(this.filters.noNuts) {
      filteredProducts = filteredProducts.filter(item => {
-       return item.nuts === undefined;
+       return item.nuts === false || item.nuts === undefined;
      })
    }
 
@@ -41,13 +41,13 @@ export default class ProductGrid {
       return item.spiciness <= this.filters.maxSpiciness;
     })
   }
-console.log(this.filters);
   if(this.filters.category) {
   filteredProducts =  filteredProducts.filter(item => {
       return item.category === this.filters.category;
     })
-  }
+  }  
 
+console.log(this.filters);
   this.elem.querySelector('.products-grid__inner').innerHTML = this.card(filteredProducts);
   } 
 

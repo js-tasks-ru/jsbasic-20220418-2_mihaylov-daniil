@@ -16,7 +16,7 @@ export default class Modal {
 
 
   onBtnCloseClick(event) {
-    if(event.target.closest('button').classList.contains('modal__close')) {
+    if(event.target.closest('.modal__close')) {
       document.querySelector('body').classList.remove('is-modal-open');
       document.querySelector('.modal').remove();
     }

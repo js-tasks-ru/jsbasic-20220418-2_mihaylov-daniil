@@ -17,18 +17,20 @@ export default class Carousel {
   }
 
   #onBtnClick = (event) => {
-    if (event.target.classList.contains('carousel__button')) {
+    if (event.target.closest('.carousel__button')) {
+      const btn = event.target.closest('.carousel__button');
       const add = new CustomEvent("product-add", {
-        detail: event.target.dataset.id,
+        detail: btn.dataset.id,
         bubbles: true,
       });
       this.container.dispatchEvent(add);
+    } else {
+      return;
     }
   }
 
   render() {
     const template = `
-
   <div class="carousel__arrow carousel__arrow_right">
     <img src="https://course-jsbasic.javascript.ru/assets/icons/angle-icon.svg" alt="icon" />
   </div>
@@ -49,7 +51,7 @@ export default class Carousel {
       </div>
     </div>
     `;
-    })}
+    }).join('')}
   
   </div>
 </div>

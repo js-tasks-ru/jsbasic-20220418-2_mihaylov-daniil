@@ -141,7 +141,7 @@ export default class Cart {
   }
 
   onPlusProduct = (event) => {
-    if (event.target.closest('button').classList.contains('cart-counter__button_plus')) {
+    if (event.target.closest('.cart-counter__button_plus')) {
       let product = event.target.closest('[data-product-id]');
       let productId = product.dataset.productId;
       this.updateProductCount(productId, 1);
@@ -150,7 +150,7 @@ export default class Cart {
   }
 
   onMinusProduct = (event) => {
-    if (event.target.closest('button').classList.contains('cart-counter__button_minus')) {
+    if (event.target.closest('.cart-counter__button_minus')) {
       let product = event.target.closest('[data-product-id]');
 
       let productId = product.dataset.productId;
@@ -219,4 +219,3 @@ export default class Cart {
     this.cartIcon.elem.onclick = () => this.renderModal();
   }
 }
-
